@@ -165,3 +165,62 @@ aws infrastructure can be created and managed.
         - it can also be that the VM is not responding or we're using the wrong DNS/IP
     - If we're getting "Connection refused", we can reach the VM, and it's the VM that sends us back the port is not open
     - If we're getting a SSH key error, check whether we're using the correct key, and whether we're passing our private key (-i in bash)
+
+### Availability Zones    
+- Availability Zones can protect our applications and data against datacenter failure
+- Not all regions support Availability Zones, we'll have to check the region map at [https://azure.microsoft.com/en-us/global-infrastructure/geographies/](https://azure.microsoft.com/en-us/global-infrastructure/geographies/) see whether our region supports Availability Zones
+- Each Availability Zone is a **uniqure physical location** within the same region
+    - They are made up of one or more datacenters with **independent power, cooling and networking**
+- There are 2 categories of services that support Availability Zones:
+    - **Zonal services** : we specify in what Availability Zone they run (for example a VM, Managed Disk, ...)
+    - **Zone-Redundant** : services that automatically replicate across zones (for example zone redundant storage)
+- Be aware that Availability Zone identifiers (1,2,3) are **mapped differently** for each subscription
+- Availability Zone 1 can be different in subscription A than in subscription B
+
+### Fault & Update Domains 
+- **Fault Domain**: logical group of underlying hardware with **common power source and network switch**, like a rack in on-premises terminology
+- **Update Domain**: logical group of underlying hardware that can undergo **maintenance or be rebooted** at the same time
+- We generally want to make sue that our Virtual Machines are in a different fault domain and update domain, to ensure high availability for our application when a power source / network switch fails or when an update is performed and the machine is temporary offline
+    - This especially when we can't place our VMs cross-zone, for example when region we're in doesn't support multiple Availability Zones
+
+
+### Scale Sets
+- A scale set launches a group of Virtual Machines
+- We can manually or automatically **scale up or down** by **adding or removing** VMs
+- This is horizontal scalability, we add or remove VMs, the size or type of the VM stays the same
+- We typically create an autoscaling group with x amount of instances
+- We can then create autoscaling rules or manually change the size when demand is higher
+- Scale sets provide **hifh availability and application resiliency**
+    - If one of the Vms has a problem, another VM can still handle requests
+- All VMs should have the same VM type, base OS and configuration, making it **easy to handle one, ten or hundreds VMs** in a scale set
+- We typically put a **Load Balancer** in front of the VMs to load balance the requests over the multiple VMs
+- Using scale sets can also save money, by **better resource utilization**
+    - We can scale up when demand is high, but also scale down when demand is low
+- Virtual Machine Scale Sets are created with **5 fault domains by default in a region without Availability Zones**
+    - This ensures that the VMs are spread over the datacenter to increase availabilty 
+- If the region supports **Availability Zones**, then the value of fault domains will be **1 in each of the zones**
+    - In this case the VM instances will be **spread across multiple zones**, across as many racks on a best effort basis
+- Another advantage of Scale Sets is that we can enable **"Automatic OS image upgrades"**
+- During the upgrade the **OS disk of the VM will be replaced** with the latest version, and a configured health probe will check whether it was successful
+- This can be done one by one or in batch , taking into account a max percentage of images that can be unhealthy
+    - The process will also stop if there more than a certain percent **unhealthy VMs post-upgrade**
+- Currently offered on the official **UbuntuServer** images, **CentOS** and specific **WindowsServer** versions
+
+### Load Balancers
+- Once we have our scale set, we typically put a **Load Balancer** in front of it 
+- The Azure Load Balancer supports **inbound and outbound traffic**
+    - Inbound: **from internet to the Load Balancer** to our backend VMs
+    - Outbound: **from our backend** VMs **to the internet**
+- To route the traffic from the Load Balancer to the backends, we setup Load Balancer Rules
+    - For example, port 80 (http) to port 8080 (application) on the VM backends
+- Azure Load Balancers are available with **2 different SKUs**: Basic & Standard
+- Basic is currently available at **no extra charge**
+- **Standard incurs a charge**, but supports extra features and scaling (it supports Availability Zones)
+- The Standard Load Balancer provides a **zone-redundant frontend** for inbound and outbound traffic
+    - Only 1 public IP of type Standard (instead of Basic) need sto be assigned, which will **automatically reroute traffic if a zone failure would occur** (a 2 public IP zone-specific solution is also possible for more granular control)
+- Beside Load Balancing we can also do **port-forwarding**, creating an **inbound NAT rule** to forward a port from the Load Balancer to a specific backend
+    - Used for example to map unique ports on the Load Balancer to port 22 on the backends
+    - Port 50002 On Load Balancer => backend 1:22
+    - Port 50003 On Load Balancer => backend 2:22
+- This type of Load Balancer **doesn't terminate, respond or interacts with the payload of UDP / TCP packets**, it only forwards it: **it's not a proxy**
+    - If we're looking for a Level-7 Load Balancer (which acts like a proxy), then you'll have to implement an **"Application Load Balancer"** - which can also do application layer processing and terminate TLS.
