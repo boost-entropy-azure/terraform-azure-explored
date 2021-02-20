@@ -224,3 +224,16 @@ aws infrastructure can be created and managed.
     - Port 50003 On Load Balancer => backend 2:22
 - This type of Load Balancer **doesn't terminate, respond or interacts with the payload of UDP / TCP packets**, it only forwards it: **it's not a proxy**
     - If we're looking for a Level-7 Load Balancer (which acts like a proxy), then you'll have to implement an **"Application Load Balancer"** - which can also do application layer processing and terminate TLS.
+
+## Azure Services
+
+### Azure Database for MySQL
+- MySQL - is an **open-source** relational database managemant system.
+- Azure Database for MySQL is a **managed service**.
+    - We get Automatic database patching, automatic backups, built-on monitoring, security.
+- High availability, Application retry logic is essential
+- Information protection and encryption:
+    - In-transit
+    - At-rest
+- Network security: Connectivity architecture, IP firewall rules, Virtual network firewall rules
+
