@@ -237,3 +237,20 @@ aws infrastructure can be created and managed.
     - At-rest
 - Network security: Connectivity architecture, IP firewall rules, Virtual network firewall rules
 
+### Azure Database for Azure SQL
+- Azure SQL Database is a fully managed database engine
+- Handles almost all of the database managemant functions like: **upgrading, patching, backups and monitoring**
+- Azure SQL Database is always running on the **latest stable version** of SQL Server Database Engine
+- Build in business continuity and global scalability
+    - Automatic backups
+    - Point-in-time restores
+    - Active geo-replication
+    - Auto-failover groups
+    - Zone-redundant databases
+- Deployment models
+    - **Azure SQL Database** - A single fully managed and islotaed database
+    - **Elastic Pools** - A collection of single databases wit shared resources
+    - **Managed Instance** - Fully managed instance of SQL Server on-premises (Enterprise Edition), Instance Pools
+- **SQL Database** deployment consists out of 2 components
+    - SQL database server (central administrative point)
+    - 1 or more **SQL Database(s)**
