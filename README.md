@@ -285,3 +285,120 @@ aws infrastructure can be created and managed.
   - Data access using our favorite tools **SQL, MongoDB, Cassandra, Tables, Gremlin or etcd**
   - It can store : Key value pairs, Column family data, Documents (like mongoDB objects), Graph
   - **Consistency models:** Strong, Bounded-stateless, Session, Consistent prefix, Eventual
+
+### Azure Storage
+
+- What is Azure Storage ?
+  - Modern Solution, Virtually limitless, Pay-as-you-go, Clients: .Net, Ruby, Java, Access to Azure Storage via the Azure storage Account
+- Azure storage features:
+  - Durable and high availability
+  - Scalability
+  - Security
+  - Accessibility
+- Azure storage Types:
+
+  - Azure blob storage - Unstructured data , BLOB's
+  - Azure table storage - Part of Azure CosmosDB, NoSQL data
+  - Azure file storage - Managed file sharing, SMB
+  - Azure queue storage - Message storage queue, HTTP(S)
+  - Azure Data Lake Storage Gen2 - big data analysis
+  - Disk storage - Managed(behind the hood) and unmanaged disks (VHD)
+
+  ### Azure Storage Account
+
+  - Storage Account :
+    - Collections of all storage data objects, Unique namespace, accessible for anywhere, Highly available, Secure, Super Scalable
+  - Types:
+    - General-purpose v2 - **Recommended**
+    - General-purpose v1 - _Legacy_
+    - BlockBlobStorage - For **high, low latency** transaction scenarios
+    - FileStorage accounts - For **high performance** scale applications
+    - BlobStorage accounts - Legacy **Blob-only** storage
+
+- Azure Storage redundancy:
+  - Locally redundant storage (LRS)
+  - Zone-redundant storage (ZRS)
+  - Geo-redundant storage (GRS)
+    - Read-access geo-redundant storage (RA-GRS)
+  - Geo-zone-redundant storage (GZRS)
+    - Read-access geo-zone-redundant storage (RA-GZRS)
+
+### Azure BLOB Storage
+
+- Azure Blob is a service that stores unstructured data
+- Accessed from anywhere via HTTP(S)
+- Blob = **B**inary **L**arge **Ob**ject
+- When to use Azure Blob storage ?
+  - Storing files for shared access
+  - Video and audio streaming
+  - Storing data for analysis
+  - Writing log files
+  - Storing data for disaster recovery, backup and archiving
+- Types of BLOB storage:
+  - Block blobs
+    - store text and binary data, up to 4.7TB
+  - Append blobs
+    - optimized for append operations as loggin data(app/webserver/...)
+  - Page blobs
+    - Random access files up to 8TB, VHD
+- Access tiers (Only for General Purpose v2 storage accounts):
+  - Hot - Expected to be accessed R/W frequently
+  - Cool - Short-term backup and disaster recover datasets
+  - Archive - Long-term backup, secondary backup, and archival datasets
+
+### Azure Table Storage
+
+- Azure table storage is
+  - NoSQL, Schemaless, Scalable - Store TB's of data
+  - Good for:
+    - Data without joins, foreign keys
+  - Protocol - OData, LINQ
+
+### Azure File Storage
+
+- Azure file Storage is
+  - Fully managed file share
+  - SMB
+  - Shares can be mounted concurrently
+  - Ability to be cached by Windows Server with Azure File Sync
+  - Good for:
+    - Replacing local file servers, Lift and shift applications
+
+### Azure Queue Storage
+
+- Azure queue storage is
+  - Ability to scale at bursts
+  - Built-in resilience
+  - Good for : Decoupling services
+  - Data accessible via the REST API
+  - Clients: .NET, Java, Node.js , Python , etc,..
+
+### Azure Data Lake Storage Gen2
+
+- Azure Data Lake Storage Gen2 is
+  - Built on **Azure Blob Storage**
+  - Combination of: Azure Blob storage and Azure Data Lake Storage Gen1
+  - Designed to service multiple petabytes
+  - Designed to deliver hundreds of gigabits of throughput
+  - Support for HDInsight, Hadoop, Cloudera, Azure Databricks, Hortonworks
+
+### Azure Disk Storage
+- Disk storage
+  - Unmanaged disks - Legacy
+    - Storage account necessary
+  - Managed disks - Recommended
+     - No storage account necessary
+- Managed disks features
+  - Encryption 
+  - Disk roles - Data disk, OS disk, Temporary disk
+  - Managed disk snapshots / images
+- Managed disks benefits:
+  - Highly durable and available
+  - Simple and scalable VM deployment
+  - Integration with availability sets
+  - Integration with Availability Zones
+  - Azure Backup support
+  - Granular access control  
+- Considerations of disk usage
+  - Cached vs Uncached
+  - Use the correct type of vm and storage tier
