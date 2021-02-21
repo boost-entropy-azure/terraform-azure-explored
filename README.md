@@ -402,3 +402,29 @@ aws infrastructure can be created and managed.
 - Considerations of disk usage
   - Cached vs Uncached
   - Use the correct type of vm and storage tier
+
+### Azure AD
+- What is Azure Active Directory ?
+  - Cloud-based identity and access management
+  - Pay as you go
+  - For:
+    - External - Azure Portal, Office 365 and thousands of SaaS applications
+    - Internal - Custom developed apps/ intranet / ...
+- What is Azure Active Directory **not** ?   
+  - Azure AD is **not** a replacement for Windows Server Active Directory
+- Azure AD Connect is a tool for connecting on premises identity infrastructure to Mircosoft Azure AD
+- Azure Active Directory **B2C**
+  - Manage customer sign up/ sign in 
+  - Mainly for custom public applications
+- Azure Acitve Directory **B2B**
+  - Good for "guests"
+  - Share company apps with other orgs
+  - Remain in control of your corporate data
+- Azure Active Directory **Terraform Provider**
+  - Infrastructure Azure Active Directory
+  - Azure Resource Manager APIs'
+- Managages Azure AD:
+  - Applications
+  - Service principals
+  - Groups / Users
+
