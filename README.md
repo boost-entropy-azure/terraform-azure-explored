@@ -448,3 +448,10 @@ aws infrastructure can be created and managed.
 - Connection draining
 - Custom error pages
 - Rewrite HTTP Headers
+
+### Azure Kubernetes Service (AKS)
+
+- Azure Kubernetes Service (AKS) is Azures' fully managed Kubernetes offering
+- Kuberentes is a Container Orchestrator, it allows us to run and manage containers
+- AKS **integrates** with all the other Azure services, so that we don't have to setup services like logging and networking ourselves
+- with terraform, we can easily set-up an AKS cluster
