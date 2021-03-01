@@ -428,3 +428,23 @@ aws infrastructure can be created and managed.
   - Service principals
   - Groups / Users
 
+### Application Gateway
+- Features : web traffic load balancer, operates on the OSI layer 7 , SSL/TLS termination , Redirecting
+- Request Based Routing
+  - Routing decisions based on additional attributes in an HTTP request
+    - URI path (eg: /water)
+    - Host header (ex: Host: www.simple.com)
+      - this allows the application gateway to be used for mutliple domains
+- WAF (Web application firewall)
+  - Central protection against common exploits, bots and scanners
+  - SQL injection protection
+  - Cross site scripting attacks
+- Autoscaling
+  - Scale up or down based on traffic
+- Zone redundancy
+- Static VIP (Virtual IP) - of type *exclusive*
+- Ingress Controller for AKS 
+- Session Affinity
+- Connection draining
+- Custom error pages
+- Rewrite HTTP Headers
